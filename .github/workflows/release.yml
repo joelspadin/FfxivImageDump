@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.rid }}
-          path: bin/release/${{matrix.rid}}/publish
+          path: bin/release/net10.0/${{matrix.rid}}/publish
 
   release:
     name: "GitHub release"
