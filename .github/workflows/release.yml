@@ -51,6 +51,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           path: bin/
+          skip-decompress: true
 
       - name: Create GitHub release
         env:
