@@ -24,6 +24,6 @@ jobs:
         run: dotnet pack -c Release /p:Version=${VERSION}
 
       - name: Push
-        run: dotnet nuget push nupkg/Spadin.FfxivImageDump.${VERSION}.nukpg -s https://api.nuget.org/v3/index.json -k ${API_KEY}
+        run: dotnet nuget push nupkg/Spadin.FfxivImageDump.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k ${API_KEY}
         env:
           API_KEY: ${{ secrets.API_KEY }}
