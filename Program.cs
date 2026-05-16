@@ -24,11 +24,12 @@ var singleIdOption = new Option<uint?>("--single", "-s")
     HelpName = "id",
 };
 
-var sqpackPathOption = new Option<string>("--sqpack", "-q")
+var sqpackPathOption = new Option<DirectoryInfo>("--sqpack", "-q")
 {
     Description = @"Path to the ""game\sqpack"" directory",
     HelpName = "path",
 };
+sqpackPathOption.AcceptExistingOnly();
 
 var outputPathOption = new Option<string>("--out", "-o")
 {
@@ -37,7 +38,7 @@ var outputPathOption = new Option<string>("--out", "-o")
     HelpName = "path",
 };
 
-var rootCommand = new RootCommand()
+var rootCommand = new RootCommand("Dump FFXIV image files")
 {
     startIdArg,
     endIdArg,
@@ -55,7 +56,7 @@ int DumpFiles(ParseResult result)
     var singleId = result.GetValue(singleIdOption);
     var startId = singleId ?? result.GetValue(startIdArg) ?? 0;
     var endId = singleId ?? result.GetValue(endIdArg) ?? 999999;
-    var sqpackPath = result.GetValue(sqpackPathOption) ?? DefaultSqpackPath;
+    var sqpackPath = result.GetValue(sqpackPathOption) ?? new DirectoryInfo(DefaultSqpackPath);
     var outputPath = result.GetValue(outputPathOption) ?? "out";
 
     var outputPathIsFullPath = singleId is not null && Path.GetExtension(outputPath) == ".png";
@@ -68,7 +69,7 @@ int DumpFiles(ParseResult result)
 
     Console.WriteLine($"Writing to {Path.GetFullPath(outputPath)}");
 
-    var lumina = new Lumina.GameData(sqpackPath);
+    var lumina = new Lumina.GameData(sqpackPath.FullName);
     string? lastDirectory = null;
 
     for (var i = startId; i <= endId; i++)
