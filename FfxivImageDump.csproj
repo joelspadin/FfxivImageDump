@@ -6,16 +6,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PublishAOT>true</PublishAOT>
-    <PublishSingleFile>true</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
-    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+
+    <Version>1.0.1</Version>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>ffxivimagedump</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+
+    <PackageId>Spadin.FfxivImageDump</PackageId>
+    <Authors>Joel Spadin</Authors>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/joelspadin/FfxivImageDump</RepositoryUrl>
+    <PackageDescription>A tool for dumping UI images from Final Fantasy XIV as PNG files</PackageDescription>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Lumina" Version="7.5.0" />
     <PackageReference Include="SkiaSharp" Version="3.119.2" />
     <PackageReference Include="System.CommandLine" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
 </Project>
