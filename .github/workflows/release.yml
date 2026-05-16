@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.rid }}
-          path: bin/release/net10.0/${{matrix.rid}}/publish
+          path: bin/Release/net10.0/${{matrix.rid}}/publish
 
   release:
     name: "GitHub release"
@@ -49,6 +49,8 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v8
+        with:
+          path: bin/
 
       - name: Create GitHub release
         env:
@@ -58,3 +60,12 @@ jobs:
           '${{ github.ref_name }}'
           --repo '${{ github.repository }}'
           --generate-notes
+
+      - name: Upload artifacts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          gh release upload
+          '${{ github.ref_name }}'
+          --repo '${{ github.repository }}'
+          bin/**
