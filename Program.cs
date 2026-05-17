@@ -2,7 +2,6 @@
 using Lumina.Extensions;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using SkiaSharp;
 
 // TODO: figure out default locations for platforms other than Windows.
 const string DefaultSqpackPath =
