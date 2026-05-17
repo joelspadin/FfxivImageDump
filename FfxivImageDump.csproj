@@ -7,8 +7,6 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-    <Version>1.0.1</Version>
-
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>ffxivimagedump</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
