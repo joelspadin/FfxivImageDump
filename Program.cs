@@ -1,5 +1,7 @@
 ﻿using System.CommandLine;
 using Lumina.Extensions;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using SkiaSharp;
 
 // TODO: figure out default locations for platforms other than Windows.
@@ -101,23 +103,8 @@ int DumpFiles(ParseResult result)
             lastDirectory = directory;
         }
 
-        unsafe
-        {
-            fixed (byte* pixels = icon.ImageData)
-            {
-                var info = new SKImageInfo(
-                    icon.Header.Width,
-                    icon.Header.Height,
-                    SKColorType.Bgra8888
-                );
-                var image = SKImage.FromPixels(info, (IntPtr)pixels);
-
-                using var encoded = image.Encode(SKEncodedImageFormat.Png, 100);
-                using var stream = new FileStream(path, FileMode.OpenOrCreate);
-
-                encoded.SaveTo(stream);
-            }
-        }
+        using var image = Image.LoadPixelData<Bgra32>(icon.ImageData, icon.Header.Width, icon.Header.Height);
+        image.SaveAsPng(path);
     }
 
     Console.WriteLine();
